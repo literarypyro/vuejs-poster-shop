@@ -5,15 +5,10 @@ new Vue({
     data: {
         total:0,
         items: [
-            { id:1,title: "Item 1"},
-            { id:2,title: "Item 2"},
-            { id:3,title: "Item 3"}
         ],
         cart: [
-
-
-
-        ]
+        ],
+        search: ""
  
     },
     methods: {
@@ -52,19 +47,17 @@ new Vue({
                     }
                 }
             }
+        },
+        onsubmit: function(){
+            this.$http.get("/search/".concat(this.search)).then(function(res){
+                this.items=res.data;
+            
+            });
         }
-
     },
     filters: {
         currency: function(price){
             return '$'.concat(price.toFixed(2));        
         }
-
-
-
     }
-
-
-
-
 });
